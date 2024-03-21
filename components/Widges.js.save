@@ -1,0 +1,143 @@
+ccimport React, { useState } from 'react';
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+
+export default function DynamicButtons() {
+  const [buttonList, setButtonList] = useState(['Bouton 1', 'Bouton 2', 'Bouton 3']); // Liste initiale de boutons
+  const [newButtonName, setNewButtonName] = useState(''); // Nom du nouveau bouton saisi par l'utilisateur
+
+  // Fonction pour ajouter un nouveau bouton à la liste
+  const addNewButton = () => {
+    if (newButtonName) {
+      setButtonList([...buttonList, newButtonName]);
+      setNewButtonName('');
+    }
+  };
+
+  return (
+    <ScrollView>
+      <View style={{ padding: 20 }}>
+        {/* Afficher les boutons existants à partir de la liste */}
+        {buttonList.map((buttonName, index) => (
+          <TouchableOpacity key={index} style={{ marginVertical: 10 }}>
+            <Text>{buttonName}</Text>
+          </TouchableOpacity>
+        ))}
+
+        {/* Saisir le nom du nouveau bouton et bouton d'ajout */}
+        <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 10 }}>
+          <TextInput
+            placeholder="Nom du nouveau bouton"
+            value={newButtonName}
+            onChangeText={(text) => setNewButtonName(text)}
+            style={{ flex: 1, borderWidth: 1, borderColor: '#ccc', padding: 8, marginRight: 8 }}
+          />
+          <TouchableOpacity onPress={addNewButton} style={{ backgroundColor: 'blue', padding: 8, borderRadius: 4 }}>
+            <Text>Ajouter Bouton</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </ScrollView>
+  );
+}
+
+
+// import React, { useState, useEffect} from'react';
+// import { StatusBar } from 'expo-status-bar';
+// import { StyleSheet, Text, View, Button, TouchableOpacity, Image, ScrollView, TextInput, Dimensions, Animated} from 'react-native';
+// import { Header, createStackNavigator } from '@react-navigation/stack';
+// import { useNavigation } from '@react-navigation/native';
+// import Note from './Note';
+// import News from './News';
+// import Discord from './Discord';
+// import Calendar from './Calendar';
+
+// const Stack = createStackNavigator();
+// const ScreenWidth = Dimensions.get('window').width;
+// const ScreenHeight = Dimensions.get('window').height;
+
+// const WidgetCadran = ({ couleur, icone }) => {
+//   return (
+//     <View style={[styles.container, { backgroundColor: couleur }]}>
+//       <Image source={icone} style={styles.icone} />
+//     </View>
+//   );
+// };
+
+// function Widget_Home(){
+//     const navigate = useNavigation();
+//     return(
+//         <ScrollView>
+//             <View style={styles_widget.container_1}>
+//                 <TouchableOpacity onPress={() => navigate.navigate('NotePad')}>
+//                     <WidgetCadran couleur="white" icone={require('../assets/note_icon.png')} />
+//                     <Text style={styles_widget.text_1}>NotePad</Text>
+//                 </TouchableOpacity>
+//                 <TouchableOpacity onPress={() => navigate.navigate('News')}>
+//                     <WidgetCadran couleur="white" icone={require('../assets/news.png')} />
+//                     <Text style={styles_widget.text_1}>News</Text>
+//                 </TouchableOpacity>
+//             </View>
+//             <View style={styles_widget.container_2}>
+//                 <TouchableOpacity onPress={() => navigate.navigate('Discord')}>
+//                     <WidgetCadran couleur="blue" icone={require('../assets/discord_icon.png')} />
+//                     <Text style={styles_widget.text_1}>Discord</Text>
+//                 </TouchableOpacity>
+//                 <TouchableOpacity onPress={() => navigate.navigate('Calendar')}>
+//                     <WidgetCadran couleur="white" icone={require('../assets/calendar_icon.png')} />
+//                     <Text style={styles_widget.text_1}>Calendar</Text>
+//                 </TouchableOpacity>
+//             </View>
+//         </ScrollView>
+//     )
+// }
+
+
+
+// export default function Widgets(){
+//     return(
+//         <Stack.Navigator initialRouteName='Home_widgets'>
+//             <Stack.Screen name="Home_widgets" component={Widget_Home} options={{title: 'Widgets', headerShown: false}}/>
+//             <Stack.Screen name="Calendar" component={Calendar}/>
+//             <Stack.Screen name="NotePad" component={Note}/>
+//             <Stack.Screen name="Discord" component={Discord}/>
+//             <Stack.Screen name="News" component={News}/>
+//         </Stack.Navigator>
+//     )
+// }
+
+// const styles = StyleSheet.create({
+//     container: {
+//       width: (ScreenWidth/2) - 10,
+//       height: ScreenHeight/4,
+//       borderRadius: 30,
+//       justifyContent: 'center',
+//       alignItems: 'center',
+//     },
+//     icone: {
+//       width: 80,
+//       height: 80,
+//       resizeMode: 'contain',
+//       padding: 10,
+//     },
+//     backgroundContainer: {},
+//     background: {
+
+//     },
+//   });
+
+//   const styles_widget = StyleSheet.create({
+//     container_1: {
+//         flexDirection: 'row',
+//         justifyContent: 'space-between',
+//         paddingVertical: 50,
+//     },
+//     container_2: {
+//         flexDirection: 'row',
+//         justifyContent: 'space-between',
+//     },
+//     text_1: {
+//         fontSize: 20,
+//         fontWeight: 'bold',
+//         textAlign: 'center',
+//     },
+//   });
